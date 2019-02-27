@@ -1,0 +1,68 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.android.support:appcompat-v7:$project.app_compat"
+    implementation "com.android.support:animated-vector-drawable:$project.app_compat"
+    implementation "com.android.support:design:$project.app_compat"
+    implementation "com.android.support:transition:$project.app_compat"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //Lifecycle extension
+    api "android.arch.lifecycle:runtime:$project.lifecycle_version"
+    api "android.arch.lifecycle:extensions:$project.lifecycle_version"
+
+    //RX
+    api "io.reactivex.rxjava2:rxjava:$project.rx_java_version"
+    api "io.reactivex.rxjava2:rxandroid:$project.rx_android_version"
+
+    //RETROFIT
+    api("com.squareup.retrofit2:retrofit:$project.retrofit_version") {
+        exclude module: 'okhttp'
+    }
+    api "com.squareup.okhttp3:logging-interceptor:$project.okhttpinterceptor"
+    api "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$project.retrofit_adapter_version"
+
+    //GSON
+    api "com.google.code.gson:gson:$project.gson_version"
+    api "com.squareup.retrofit2:converter-gson:$project.gson_converter_version"
+
+    //OKHTTP
+    api "com.squareup.okhttp3:okhttp:$project.okhttp_version"
+
+    //CHUCK
+    debugImplementation "com.readystatesoftware.chuck:library:$project.chuck_version"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$project.chuck_version"
+
+    //Dagger 2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+}
